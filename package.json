@@ -22,20 +22,22 @@
     "main": "lib/index.js",
     "license": "MIT",
     "dependencies": {
-        "typescript-helper-functions": "^1.0.3",
-        "typescript-ilogger": "^1.0.1"
+        "typescript-helper-functions": "^1.0.9",
+        "typescript-ilogger": "^1.0.3"
     },
     "devDependencies": {
-        "@types/aws-lambda": "^8.10.51",
-        "@types/jest": "^25.2.3",
-        "@types/node": "^14.0.5",
-        "aws-sdk": "^2.685.0",
-        "jest": "^26.0.1",
-        "jest-junit": "^10.0.0",
+        "@types/aws-lambda": "^8.10.59",
+        "@types/jest": "^26.0.4",
+        "@types/node": "^14.0.22",
+        "@types/uuid": "^8.0.0",
+        "aws-sdk": "^2.713.0",
+        "jest": "^26.1.0",
+        "jest-junit": "^11.0.1",
+        "npm-run-all": "^4.1.5",
         "rimraf": "^3.0.2",
-        "ts-jest": "^26.0.0",
+        "ts-jest": "^26.1.1",
         "tslint": "^6.1.2",
-        "typescript": "^3.3.3"
+        "typescript": "^3.9.6"
     },
     "files": [
         "lib/**"
@@ -47,7 +49,10 @@
             "jest-junit"
         ],
         "rootDir": "src",
-        "testEnvironment": "node"
+        "testEnvironment": "node",
+        "coverageReporters": [
+            "cobertura"
+        ]
     },
     "scripts": {
         "prebuild": "rimraf ./lib",
@@ -55,6 +60,21 @@
         "clean": "rimraf ./lib",
         "prepublishOnly": "npm run build",
         "postpublish": "npm run clean",
-        "test": "jest --ci"
+        "test": "jest --ci --coverage",
+        "update": "run-s update:*",
+        "update:helper_functions": "npm i typescript-helper-functions@latest",
+        "update:ilogger": "npm i typescript-ilogger@latest",
+        "update:types_lambda": "npm i @types/aws-lambda@latest --save-dev",
+        "update:types_jest": "npm i @types/jest@latest --save-dev",
+        "update:types_node": "npm i @types/node@latest --save-dev",
+        "update:types_uuid": "npm i @types/uuid@latest --save-dev",
+        "update:aws_sdk": "npm i aws-sdk@latest --save-dev",
+        "update:jest": "npm i jest@latest --save-dev",
+        "update:jest_junit": "npm i jest-junit@latest --save-dev",
+        "update:npm_run_all": "npm i npm-run-all@latest --save-dev",
+        "update:rimraf": "npm i rimraf@latest --save-dev",
+        "update:ts_jest": "npm i ts-jest@latest --save-dev",
+        "update:tslint": "npm i tslint@latest --save-dev",
+        "update:typescript": "npm i typescript@latest --save-dev"
     }
 }
