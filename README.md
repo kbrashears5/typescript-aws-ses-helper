@@ -4,9 +4,9 @@
     
 <b>Typescript helper functions for AWS SES service</b>
     
-[![Build Status](https://dev.azure.com/kbrashears5/github/_apis/build/status/kbrashears5.typescript-aws-ses-helper?branchName=master)](https://dev.azure.com/kbrashears5/github/_build/latest?definitionId=13&branchName=master)
-[![Teses](https://img.shields.io/azure-devops/tests/kbrashears5/github/13)](https://img.shields.io/azure-devops/tests/kbrashears5/github/13)
-[![Code Coverage](https://img.shields.io/azure-devops/coverage/kbrashears5/github/13)](https://img.shields.io/azure-devops/coverage/kbrashears5/github/13)
+[![Build Status](https://dev.azure.com/kbrashears5/github/_apis/build/status/kbrashears5.typescript-aws-ses-helper?branchName=master)](https://dev.azure.com/kbrashears5/github/_build/latest?definitionId=23&branchName=master)
+[![Tests](https://img.shields.io/azure-devops/tests/kbrashears5/github/23)](https://img.shields.io/azure-devops/tests/kbrashears5/github/23)
+[![Code Coverage](https://img.shields.io/azure-devops/coverage/kbrashears5/github/23)](https://img.shields.io/azure-devops/coverage/kbrashears5/github/23)
 
 [![NPM Version](https://img.shields.io/npm/v/typescript-aws-ses-helper)](https://img.shields.io/npm/v/typescript-aws-ses-helper)
 [![Downloads](https://img.shields.io/npm/dt/typescript-aws-ses-helper)](https://img.shields.io/npm/dt/typescript-aws-ses-helper)
