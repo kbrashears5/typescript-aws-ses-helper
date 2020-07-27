@@ -23,7 +23,7 @@
     "license": "MIT",
     "dependencies": {
         "typescript-helper-functions": "1.0.20",
-        "typescript-ilogger": "1.0.6"
+        "typescript-ilogger": "1.0.11"
     },
     "devDependencies": {
         "@types/aws-lambda": "8.10.59",
