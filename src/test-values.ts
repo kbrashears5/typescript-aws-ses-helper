@@ -15,6 +15,13 @@ export class TestingValues {
 
     // strings
     public Body: string = 'body';
+    public ContentType: string = 'content-type';
     public EmailAddress: string = 'email-address';
+    public MessageId: string = 'message-id';
+    public Name: string = 'name';
     public Subject: string = 'string';
+
+    // objects
+    public SendEmailResponse: AWS.SES.SendEmailResponse = { MessageId: 'message-id' };
+    public SendRawEmailResponse: AWS.SES.SendRawEmailResponse = { MessageId: 'message-id' }
 }

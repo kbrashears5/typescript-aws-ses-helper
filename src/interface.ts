@@ -1,3 +1,5 @@
+import { Email } from './email';
+
 /**
  * SES Helper
  */
@@ -19,4 +21,10 @@ export interface ISESHelper {
         toAddresses: string[],
         fromAddress: string,
         body: string | Buffer): Promise<AWS.SES.SendEmailResponse>;
+
+    /**
+     * Sends an email. Optionally sends with attachments
+     * @param emailObject {Email} Parameters to send
+     */
+    SendEmailWithAttachmentsAsync(emailObject: Email): Promise<AWS.SES.SendRawEmailResponse>;
 }
