@@ -30,7 +30,7 @@
         "@types/jest": "26.0.8",
         "@types/node": "14.0.27",
         "@types/uuid": "8.0.0",
-        "aws-sdk": "2.724.0",
+        "aws-sdk": "2.727.1",
         "jest": "26.2.1",
         "jest-junit": "11.1.0",
         "rimraf": "3.0.2",
