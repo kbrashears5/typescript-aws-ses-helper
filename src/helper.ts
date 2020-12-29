@@ -1,4 +1,4 @@
-import * as AWS from 'aws-sdk';
+import * as SES from '@aws-sdk/client-ses';
 import { ILogger } from 'typescript-ilogger';
 import { BaseClass } from 'typescript-helper-functions';
 import { ISESHelper } from './interface';
@@ -12,20 +12,21 @@ export class SESHelper extends BaseClass implements ISESHelper {
     /**
      * AWS Repository for SES
      */
-    public Repository: AWS.SES;
+    public Repository: SES.SES;
 
     /**
      * Initializes new instance of SESHelper
      * @param logger {ILogger} Injected logger
-     * @param repository {AWS.SES} Injected Repository. A new repository will be created if not supplied
-     * @param options {AWS.SES.ClientConfiguration} Injected configuration if a Repository is supplied
+     * @param repository {SES.SES} Injected Repository. A new repository will be created if not supplied
+     * @param options {SES.ClientConfiguration} Injected configuration if a Repository is supplied
      */
     constructor(logger: ILogger,
-        repository?: AWS.SES,
-        options?: AWS.SES.ClientConfiguration) {
+        repository?: SES.SES,
+        options?: SES.SESClientConfig) {
 
         super(logger);
-        this.Repository = repository || new AWS.SES(options);
+        options = this.ObjectOperations.IsNullOrEmpty(options) ? { region: 'us-east-1' } as SES.SESClientConfig : options!;
+        this.Repository = repository || new SES.SES(options);
     }
 
     /**
@@ -38,7 +39,7 @@ export class SESHelper extends BaseClass implements ISESHelper {
     public async SendEmailAsync(subject: string,
         toAddresses: string[],
         fromAddress: string,
-        body: string | Buffer): Promise<AWS.SES.SendEmailResponse> {
+        body: string | Buffer): Promise<SES.SendEmailResponse> {
 
         const action = `${SESHelper.name}.${this.SendEmailAsync.name}`;
         this.LogHelper.LogInputs(action, { subject, toAddresses, fromAddress, body });
@@ -49,7 +50,7 @@ export class SESHelper extends BaseClass implements ISESHelper {
         if (this.ObjectOperations.IsNullOrWhitespace(fromAddress)) { throw new Error(`[${action}]-Must supply fromAddress`); }
 
         // create params object
-        const params: AWS.SES.SendEmailRequest = {
+        const params: SES.SendEmailRequest = {
             Destination: {
                 ToAddresses: toAddresses,
             },
@@ -68,7 +69,7 @@ export class SESHelper extends BaseClass implements ISESHelper {
         this.LogHelper.LogRequest(action, params);
 
         // make AWS call
-        const response = await this.Repository.sendEmail(params).promise();
+        const response = await this.Repository.sendEmail(params);
         this.LogHelper.LogResponse(action, response);
 
         return response;
@@ -78,7 +79,7 @@ export class SESHelper extends BaseClass implements ISESHelper {
      * Sends an email. Optionally sends with attachments
      * @param emailObject {EmailObject} Parameters to send
      */
-    public async SendEmailWithAttachmentsAsync(emailObject: Email): Promise<AWS.SES.SendRawEmailResponse> {
+    public async SendEmailWithAttachmentsAsync(emailObject: Email): Promise<SES.SendRawEmailResponse> {
 
         const action = `${SESHelper.name}.${this.SendEmailWithAttachmentsAsync.name}`;
         this.LogHelper.LogInputs(action, emailObject);
@@ -124,18 +125,18 @@ export class SESHelper extends BaseClass implements ISESHelper {
         // signifies the end of the email
         rawMessageData += `--`;
 
-        const rawMessageDataBuffer: AWS.SES.RawMessageData = new Buffer(rawMessageData);
+        const rawMessageDataBuffer = this.ObjectOperations.ConvertStringToArrayBuffer(rawMessageData)
 
-        const rawMessage: AWS.SES.RawMessage = { Data: rawMessageDataBuffer };
+        const rawMessage: SES.RawMessage = { Data: rawMessageDataBuffer };
 
         const request = {
             Destinations: emailObject.ToAddresses,
             Source: emailObject.FromAddress,
             RawMessage: rawMessage,
-        } as AWS.SES.SendRawEmailRequest;
+        } as SES.SendRawEmailRequest;
         this.LogHelper.LogRequest(action, request);
 
-        const response = await this.Repository.sendRawEmail(request).promise();
+        const response = await this.Repository.sendRawEmail(request);
         this.LogHelper.LogRequest(action, response);
 
         return response;
