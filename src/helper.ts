@@ -12,13 +12,13 @@ export class SESHelper extends BaseClass implements ISESHelper {
     /**
      * AWS Repository for SES
      */
-    public Repository: SES.SES;
+    private Repository: SES.SES;
 
     /**
      * Initializes new instance of SESHelper
      * @param logger {ILogger} Injected logger
      * @param repository {SES.SES} Injected Repository. A new repository will be created if not supplied
-     * @param options {SES.ClientConfiguration} Injected configuration if a Repository is supplied
+     * @param options {SES.SESClientConfig} Injected configuration if a Repository is supplied
      */
     constructor(logger: ILogger,
         repository?: SES.SES,

@@ -5,12 +5,6 @@ import * as SES from '@aws-sdk/client-ses';
  * SES Helper
  */
 export interface ISESHelper {
-
-    /**
-     * AWS Repository for SES
-     */
-    Repository: SES.SES;
-
     /**
      * Send an email
      * @param subject {string} Subject of email
