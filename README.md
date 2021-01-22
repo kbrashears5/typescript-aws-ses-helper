@@ -50,3 +50,6 @@ const response = await helper.SendEmailAsync('subject',
     'fromAddress',
     'body');
 ```
+
+## Notes
+If no options are supplied, will default to `us-east-1` as the region
