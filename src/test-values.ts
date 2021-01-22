@@ -1,3 +1,5 @@
+import * as SES from '@aws-sdk/client-ses';
+
 /**
  * Test values
  */
@@ -22,6 +24,6 @@ export class TestingValues {
     public Subject: string = 'string';
 
     // objects
-    public SendEmailResponse: AWS.SES.SendEmailResponse = { MessageId: 'message-id' };
-    public SendRawEmailResponse: AWS.SES.SendRawEmailResponse = { MessageId: 'message-id' }
+    public SendEmailResponse: SES.SendEmailResponse = { MessageId: 'message-id' };
+    public SendRawEmailResponse: SES.SendRawEmailResponse = { MessageId: 'message-id' }
 }

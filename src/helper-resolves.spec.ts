@@ -1,66 +1,78 @@
 import { SESHelper } from './helper';
 import { Logger, LogLevel } from 'typescript-ilogger';
-import { SESMock } from './mock';
 import { TestingValues } from './test-values';
 import { Email, EmailAttachment } from './email';
+import * as SES from '@aws-sdk/client-ses';
+
+const sendEmailResponseResponse: SES.SendEmailResponse = { MessageId: 'message-id' };
+const sendRawEmailResponseResponse: SES.SendRawEmailResponse = { MessageId: 'message-id' };
+
+const sendEmail = jest.fn().mockImplementation(() => {
+    return Promise.resolve<SES.SendEmailResponse>(sendEmailResponseResponse);
+});
+const sendRawEmail = jest.fn().mockImplementation(() => {
+    return Promise.resolve<SES.SendEmailResponse>(sendRawEmailResponseResponse);
+});
+
+// mock the functions
+jest.mock('@aws-sdk/client-ses', () => {
+    return {
+        SES: jest.fn().mockImplementation(() => {
+            return {
+                sendEmail,
+                sendRawEmail,
+            };
+        }),
+    };
+});
 
 const logger = new Logger(LogLevel.Off);
-const mockerResolves = new SESMock(false);
-const sesHelperMockResolves = new SESHelper(logger, mockerResolves.Mock);
-const mockerRejects = new SESMock(true);
-const sesHelperMockRejects = new SESHelper(logger, mockerRejects.Mock);
+const sesHelperMock = new SESHelper(logger);
 const TestValues = new TestingValues();
 
 /**
  * Test the SendEmailAsync method
  */
-describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailAsync.name}`, () => {
+describe(`${SESHelper.name}.${sesHelperMock.SendEmailAsync.name}`, () => {
     // set action for this method
-    const action = `${SESHelper.name}.${sesHelperMockResolves.SendEmailAsync.name}`;
+    const action = `${SESHelper.name}.${sesHelperMock.SendEmailAsync.name}`;
 
     test(`${TestValues.ThrowsOnEmpty} subject`, () => {
-        const actual = sesHelperMockResolves.SendEmailAsync(TestValues.EmptyString,
+        const actual = sesHelperMock.SendEmailAsync(TestValues.EmptyString,
             [TestValues.EmailAddress],
             TestValues.EmailAddress,
             TestValues.Body);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} subject`);
     });
     test(`${TestValues.ThrowsOnEmpty} toAddresses`, () => {
-        const actual = sesHelperMockResolves.SendEmailAsync(TestValues.Subject,
+        const actual = sesHelperMock.SendEmailAsync(TestValues.Subject,
             TestValues.EmptyArray,
             TestValues.EmailAddress,
             TestValues.Body);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} toAddresses`);
     });
     test(`${TestValues.ThrowsOnEmpty} fromAddress`, () => {
-        const actual = sesHelperMockResolves.SendEmailAsync(TestValues.Subject,
+        const actual = sesHelperMock.SendEmailAsync(TestValues.Subject,
             [TestValues.EmailAddress],
             TestValues.EmptyString,
             TestValues.Body);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} fromAddress`);
     });
-    test(TestValues.InvalidTest, () => {
-        const actual = sesHelperMockRejects.SendEmailAsync(TestValues.Subject,
-            [TestValues.EmailAddress],
-            TestValues.EmailAddress,
-            TestValues.Body);
-        return expect(actual).rejects.toThrow(TestValues.AWSError);
-    });
     test(TestValues.ValidTest, () => {
-        const actual = sesHelperMockResolves.SendEmailAsync(TestValues.Subject,
+        const actual = sesHelperMock.SendEmailAsync(TestValues.Subject,
             [TestValues.EmailAddress],
             TestValues.EmailAddress,
             TestValues.Body);
-        return expect(actual).resolves.toEqual(mockerResolves.SendEmailResponse);
+        return expect(actual).resolves.toEqual(sendEmailResponseResponse);
     });
 });
 
 /**
  * Test the SendEmailWithAttachmentsAsync method
  */
-describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsync.name}`, () => {
+describe(`${SESHelper.name}.${sesHelperMock.SendEmailWithAttachmentsAsync.name}`, () => {
     // set action for this method
-    const action = `${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsync.name}`;
+    const action = `${SESHelper.name}.${sesHelperMock.SendEmailWithAttachmentsAsync.name}`;
 
     test(`${TestValues.ThrowsOnEmpty} fromAddress`, () => {
         const emailObject: Email = {
@@ -69,7 +81,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             ToAddresses: [TestValues.EmailAddress],
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} fromAddress`);
     });
     test(`${TestValues.ThrowsOnEmpty} messageBody`, () => {
@@ -79,7 +91,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             ToAddresses: [TestValues.EmailAddress],
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} messageBody`);
     });
     test(`${TestValues.ThrowsOnEmpty} subject`, () => {
@@ -89,7 +101,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.EmptyString,
             ToAddresses: [TestValues.EmailAddress],
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} subject`);
     });
     test(`${TestValues.ThrowsOnEmpty} toAddresses`, () => {
@@ -99,7 +111,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             ToAddresses: [],
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} at least one toAddress`);
     });
     test(`${TestValues.ThrowsOnEmpty} attachmentContents`, () => {
@@ -115,7 +127,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             Attachments: attachments,
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} attachment contents`);
     });
     test(`${TestValues.ThrowsOnEmpty} attachmentContentType`, () => {
@@ -131,7 +143,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             Attachments: attachments,
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} attachment contentType`);
     });
     test(`${TestValues.ThrowsOnEmpty} attachmentName`, () => {
@@ -147,18 +159,8 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             Attachments: attachments,
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).rejects.toThrow(`[${action}]-${TestValues.MustSupply} attachment name`);
-    });
-    test(TestValues.InvalidTest, () => {
-        const emailObject: Email = {
-            FromAddress: TestValues.EmailAddress,
-            MessageBody: TestValues.Body,
-            Subject: TestValues.Subject,
-            ToAddresses: [TestValues.EmailAddress],
-        };
-        const actual = sesHelperMockRejects.SendEmailWithAttachmentsAsync(emailObject);
-        return expect(actual).rejects.toThrow(TestValues.AWSError);
     });
     test(TestValues.ValidTest, () => {
         const emailObject: Email = {
@@ -167,7 +169,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             ToAddresses: [TestValues.EmailAddress],
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).resolves.toEqual(TestValues.SendRawEmailResponse);
     });
     test(`${TestValues.ValidTest} with attachments`, () => {
@@ -183,7 +185,7 @@ describe(`${SESHelper.name}.${sesHelperMockResolves.SendEmailWithAttachmentsAsyn
             Subject: TestValues.Subject,
             Attachments: attachments,
         };
-        const actual = sesHelperMockResolves.SendEmailWithAttachmentsAsync(emailObject);
+        const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
         return expect(actual).resolves.toEqual(TestValues.SendRawEmailResponse);
     });
 });
