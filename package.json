@@ -23,8 +23,8 @@
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-ses": "~3.7.0",
-    "typescript-helper-functions": "~1.0.105",
-    "typescript-ilogger": "~1.0.57"
+    "typescript-helper-functions": "~1.0.113",
+    "typescript-ilogger": "~1.0.66"
   },
   "devDependencies": {
     "@types/aws-lambda": "~8.10.72",
@@ -75,8 +75,8 @@
     "update:types-aws-lambda": "npm i @types/aws-lambda@latest --save-dev",
     "update:types-jest": "npm i @types/jest@latest --save-dev",
     "update:types-node": "npm i @types/node@latest --save-dev",
-    "update:typescript-eslint-plugin": "npm i @typescript-eslint/eslint-plugin --save-dev",
-    "update:typescript-eslint-parser": "npm i @typescript-eslint/parser --save-dev",
+    "update:typescript-eslint-plugin": "npm i @typescript-eslint/eslint-plugin@latest --save-dev",
+    "update:typescript-eslint-parser": "npm i @typescript-eslint/parser@latest --save-dev",
     "update:eslint": "npm i eslint@latest --save-dev",
     "update:eslint-config-prettier": "npm i eslint-config-prettier@latest --save-dev",
     "update:eslint-config-standard": "npm i eslint-config-standard@latest --save-dev",
