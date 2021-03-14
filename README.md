@@ -39,15 +39,17 @@ const response = await helper.SendEmailAsync(
 ### Running in separate account or not in Lambda
 
 ```typescript
+import * as SES from '@aws-sdk/client-ses';
+
 const logger = new Logger(LogLevel.Trace);
 
-const options: AWS.SES.ClientConfiguration = {
+const options: SES.SESClientConfig = {
   accessKeyId: '{access_key}',
   secretAccessKey: '{secret_key}',
   region: 'us-east-1',
 };
 
-const repository = new AWS.SES(options);
+const repository = new SES.SES(options);
 
 const helper = new SESHelper(logger, repository);
 

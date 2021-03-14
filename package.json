@@ -22,18 +22,18 @@
   "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-ses": "~3.7.0",
-    "typescript-helper-functions": "~1.0.113",
-    "typescript-ilogger": "~1.0.66"
+    "@aws-sdk/client-ses": "~3.8.1",
+    "typescript-helper-functions": "~1.0.119",
+    "typescript-ilogger": "~1.0.72"
   },
   "devDependencies": {
     "@types/aws-lambda": "~8.10.72",
     "@types/jest": "~26.0.20",
-    "@types/node": "~14.14.31",
+    "@types/node": "~14.14.34",
     "@types/uuid": "~8.3.0",
-    "@typescript-eslint/eslint-plugin": "~4.15.2",
-    "@typescript-eslint/parser": "~4.15.2",
-    "eslint": "~7.20.0",
+    "@typescript-eslint/eslint-plugin": "~4.17.0",
+    "@typescript-eslint/parser": "~4.17.0",
+    "eslint": "~7.22.0",
     "eslint-config-prettier": "~8.1.0",
     "eslint-config-standard": "~16.0.2",
     "eslint-plugin-prettier": "~3.3.1",
@@ -43,8 +43,8 @@
     "npm-run-all": "~4.1.5",
     "prettier": "~2.2.1",
     "rimraf": "~3.0.2",
-    "ts-jest": "~26.5.2",
-    "typescript": "~4.2.2"
+    "ts-jest": "~26.5.3",
+    "typescript": "~4.2.3"
   },
   "files": [
     "lib/**"
@@ -86,9 +86,9 @@
     "update:jest": "npm i jest@latest --save-dev",
     "update:jest-junit": "npm i jest-junit@latest --save-dev",
     "update:npm-run-all": "npm i npm-run-all@latest --save-dev",
+    "update:prettier": "npm i prettier@latest --save-dev",
     "update:rimraf": "npm i rimraf@latest --save-dev",
     "update:ts-jest": "npm i ts-jest@latest --save-dev",
-    "update:prettier": "npm i prettier@latest --save-dev",
     "update:typescript": "npm i typescript@latest --save-dev"
   }
 }
