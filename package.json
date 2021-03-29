@@ -22,7 +22,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-ses": "~3.8.1",
+    "@aws-sdk/client-ses": "~3.10.0",
     "typescript-helper-functions": "~1.0.119",
     "typescript-ilogger": "~1.0.72"
   },
