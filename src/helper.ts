@@ -154,9 +154,8 @@ export class SESHelper extends BaseClass implements ISESHelper {
     // signifies the end of the email
     rawMessageData += `--`;
 
-    const rawMessageDataBuffer = this.ObjectOperations.ConvertStringToArrayBuffer(
-      rawMessageData,
-    );
+    const rawMessageDataBuffer =
+      this.ObjectOperations.ConvertStringToArrayBuffer(rawMessageData);
 
     const rawMessage: SES.RawMessage = { Data: rawMessageDataBuffer };
 
