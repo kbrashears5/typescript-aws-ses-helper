@@ -5,23 +5,23 @@ import * as SES from '@aws-sdk/client-ses';
  */
 export class TestingValues {
   // descriptions
-  public AWSError: string = 'AWS Error';
-  public InvalidTest: string = 'returns error from AWS';
-  public MustSupply: string = 'Must supply';
-  public ThrowsOnEmpty: string = 'throws on empty';
-  public ValidTest: string = 'returns valid response from AWS';
+  public AWSError = 'AWS Error';
+  public InvalidTest = 'returns error from AWS';
+  public MustSupply = 'Must supply';
+  public ThrowsOnEmpty = 'throws on empty';
+  public ValidTest = 'returns valid response from AWS';
 
   // empty values
   public EmptyArray = [];
-  public EmptyString: string = '';
+  public EmptyString = '';
 
   // strings
-  public Body: string = 'body';
-  public ContentType: string = 'content-type';
-  public EmailAddress: string = 'email-address';
-  public MessageId: string = 'message-id';
-  public Name: string = 'name';
-  public Subject: string = 'string';
+  public Body = 'body';
+  public ContentType = 'content-type';
+  public EmailAddress = 'email-address';
+  public MessageId = 'message-id';
+  public Name = 'name';
+  public Subject = 'string';
 
   // objects
   public SendEmailResponse: SES.SendEmailResponse = { MessageId: 'message-id' };

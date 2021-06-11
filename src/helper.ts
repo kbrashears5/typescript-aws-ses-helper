@@ -14,6 +14,11 @@ export class SESHelper extends BaseClass implements ISESHelper {
   private Repository: SES.SES;
 
   /**
+   * S3 Client Config
+   */
+  private Options: SES.SESClientConfig;
+
+  /**
    * Initializes new instance of SESHelper
    * @param logger {ILogger} Injected logger
    * @param repository {SES.SES} Injected Repository. A new repository will be created if not supplied
@@ -25,10 +30,11 @@ export class SESHelper extends BaseClass implements ISESHelper {
     options?: SES.SESClientConfig,
   ) {
     super(logger);
-    options = this.ObjectOperations.IsNullOrEmpty(options)
+    this.Options = this.ObjectOperations.IsNullOrEmpty(options)
       ? ({ region: 'us-east-1' } as SES.SESClientConfig)
-      : options!;
-    this.Repository = repository || new SES.SES(options);
+      : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        options!;
+    this.Repository = repository || new SES.SES(this.Options);
   }
 
   /**

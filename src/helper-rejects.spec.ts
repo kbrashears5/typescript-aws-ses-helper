@@ -32,7 +32,7 @@ const TestValues = new TestingValues();
  * Test the SendEmailAsync method
  */
 describe(`${SESHelper.name}.${sesHelperMock.SendEmailAsync.name}`, () => {
-  test(TestValues.InvalidTest, () => {
+  test(`${TestValues.InvalidTest}`, () => {
     const actual = sesHelperMock.SendEmailAsync(
       TestValues.Subject,
       [TestValues.EmailAddress],
@@ -47,7 +47,7 @@ describe(`${SESHelper.name}.${sesHelperMock.SendEmailAsync.name}`, () => {
  * Test the SendEmailWithAttachmentsAsync method
  */
 describe(`${SESHelper.name}.${sesHelperMock.SendEmailWithAttachmentsAsync.name}`, () => {
-  test(TestValues.InvalidTest, () => {
+  test(`${TestValues.InvalidTest}`, () => {
     const emailObject: Email = {
       FromAddress: TestValues.EmailAddress,
       MessageBody: TestValues.Body,

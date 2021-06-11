@@ -3,7 +3,7 @@
  */
 export interface EmailAttachment {
   Name: string;
-  Contents: object | string;
+  Contents: any | string;
   ContentType: string;
 }
 

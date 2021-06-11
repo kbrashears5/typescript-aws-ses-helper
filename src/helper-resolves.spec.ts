@@ -74,7 +74,7 @@ describe(`${SESHelper.name}.${sesHelperMock.SendEmailAsync.name}`, () => {
       `[${action}]-${TestValues.MustSupply} fromAddress`,
     );
   });
-  test(TestValues.ValidTest, () => {
+  test(`${TestValues.ValidTest}`, () => {
     const actual = sesHelperMock.SendEmailAsync(
       TestValues.Subject,
       [TestValues.EmailAddress],
@@ -200,7 +200,7 @@ describe(`${SESHelper.name}.${sesHelperMock.SendEmailWithAttachmentsAsync.name}`
       `[${action}]-${TestValues.MustSupply} attachment name`,
     );
   });
-  test(TestValues.ValidTest, () => {
+  test(`${TestValues.ValidTest}`, () => {
     const emailObject: Email = {
       FromAddress: TestValues.EmailAddress,
       MessageBody: TestValues.Body,
@@ -210,7 +210,7 @@ describe(`${SESHelper.name}.${sesHelperMock.SendEmailWithAttachmentsAsync.name}`
     const actual = sesHelperMock.SendEmailWithAttachmentsAsync(emailObject);
     return expect(actual).resolves.toEqual(TestValues.SendRawEmailResponse);
   });
-  test(`${TestValues.ValidTest} with attachments`, () => {
+  test(`${`${TestValues.ValidTest}`} with attachments`, () => {
     const attachments: EmailAttachment[] = [
       {
         Contents: TestValues.Body,

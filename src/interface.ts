@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Email } from './email';
 import * as SES from '@aws-sdk/client-ses';
 
