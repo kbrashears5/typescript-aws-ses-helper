@@ -14,7 +14,7 @@ export class SESHelper extends BaseClass implements ISESHelper {
   private Repository: SES.SES;
 
   /**
-   * S3 Client Config
+   * SES Client Config
    */
   private Options: SES.SESClientConfig;
 

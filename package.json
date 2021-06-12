@@ -1,6 +1,6 @@
 {
   "name": "typescript-aws-ses-helper",
-  "version": "2.0.39",
+  "version": "2.0.40",
   "description": "Typescript AWS SES Helper",
   "repository": {
     "type": "git",
@@ -68,8 +68,8 @@
     "clean": "rimraf ./lib",
     "format": "prettier --write .",
     "lint": "eslint -c .eslintrc.yml \"*/**\"",
-    "prep": "npm run update:npm-run-all && npm run update && node-git-hooks",
     "prebuild": "npm run clean && npm run format && npm run lint",
+    "prep": "npm run update:npm-run-all && npm run update && node-git-hooks",
     "test": "jest --ci --coverage",
     "update:aws-sdk": "npm i @aws-sdk/client-ses@latest",
     "update:eslint-config-prettier": "npm i eslint-config-prettier@latest --save-dev",
