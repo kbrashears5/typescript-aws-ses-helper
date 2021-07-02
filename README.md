@@ -5,7 +5,7 @@
 <b>Typescript helper functions for AWS SES service</b>
     
 [![CI/CD](https://github.com/kbrashears5/typescript-aws-ses-helper/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/kbrashears5/typescript-aws-ses-helper/actions/workflows/ci-cd.yml)
-
+[![codecov](https://codecov.io/gh/kbrashears5/typescript-aws-ses-helper/branch/master/graph/badge.svg?token=QOSDQA1FDU)](https://codecov.io/gh/kbrashears5/typescript-aws-ses-helper)
 [![NPM Version](https://img.shields.io/npm/v/typescript-aws-ses-helper)](https://img.shields.io/npm/v/typescript-aws-ses-helper)
 [![Downloads](https://img.shields.io/npm/dt/typescript-aws-ses-helper)](https://img.shields.io/npm/dt/typescript-aws-ses-helper)
 
