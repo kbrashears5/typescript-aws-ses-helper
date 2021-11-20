@@ -1,6 +1,6 @@
 {
   "name": "typescript-aws-ses-helper",
-  "version": "2.0.42",
+  "version": "2.0.43",
   "description": "Typescript AWS SES Helper",
   "repository": {
     "type": "git",
@@ -22,31 +22,29 @@
   "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-ses": "~3.27.0",
-    "typescript-helper-functions": "~1.0.155",
-    "typescript-ilogger": "~1.0.110"
+    "@aws-sdk/client-ses": "~3.42.0",
+    "typescript-helper-functions": "~1.0.156",
+    "typescript-ilogger": "~1.0.111"
   },
   "devDependencies": {
-    "@types/aws-lambda": "~8.10.82",
-    "@types/jest": "~27.0.1",
-    "@types/node": "~16.6.2",
-    "@types/uuid": "~8.3.1",
-    "@typescript-eslint/eslint-plugin": "~4.29.2",
-    "@typescript-eslint/parser": "~4.29.2",
-    "eslint": "~7.32.0",
+    "@types/aws-lambda": "~8.10.85",
+    "@types/jest": "~27.0.3",
+    "@types/node": "~16.11.9",
+    "@types/uuid": "~8.3.3",
+    "@typescript-eslint/eslint-plugin": "~5.4.0",
+    "@typescript-eslint/parser": "~5.4.0",
+    "eslint": "~8.2.0",
     "eslint-config-prettier": "~8.3.0",
-    "eslint-config-standard": "~16.0.3",
-    "eslint-plugin-jest": "~24.4.0",
-    "eslint-plugin-prettier": "~3.4.0",
-    "eslint-plugin-standard": "~5.0.0",
-    "jest": "~27.0.6",
-    "jest-junit": "~12.2.0",
+    "eslint-plugin-jest": "~25.2.4",
+    "eslint-plugin-prettier": "~4.0.0",
+    "jest": "~27.3.1",
+    "jest-junit": "~13.0.0",
     "node-git-hooks": "~1.0.6",
     "npm-run-all": "~4.1.5",
-    "prettier": "~2.3.2",
+    "prettier": "~2.4.1",
     "rimraf": "~3.0.2",
-    "ts-jest": "~27.0.5",
-    "typescript": "~4.3.5"
+    "ts-jest": "~27.0.7",
+    "typescript": "~4.5.2"
   },
   "files": [
     "lib/**"
@@ -73,10 +71,8 @@
     "test": "jest --ci --coverage",
     "update:aws-sdk": "npm i @aws-sdk/client-ses@latest",
     "update:eslint-config-prettier": "npm i eslint-config-prettier@latest --save-dev",
-    "update:eslint-config-standard": "npm i eslint-config-standard@latest --save-dev",
     "update:eslint-plugin-jest": "npm i eslint-plugin-jest@latest --save-dev",
     "update:eslint-plugin-prettier": "npm i eslint-plugin-prettier@latest --save-dev",
-    "update:eslint-plugin-standard": "npm i eslint-plugin-standard@latest --save-dev",
     "update:eslint": "npm i eslint@latest --save-dev",
     "update:jest-junit": "npm i jest-junit@latest --save-dev",
     "update:jest": "npm i jest@latest --save-dev",
